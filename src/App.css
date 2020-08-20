@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Fira+Sans:wght@200;400;600&display=swap');
 
+
 * {
 	font-family: 'Fira Sans', sans-serif;
 	font-weight: 200;
@@ -29,6 +30,14 @@
 
 .right-border {
 	border-right: 1px solid grey;
+}
+
+.income-border {
+	border-left: 6px solid green;
+}
+
+.expense-border {
+	border-left: 6px solid red;
 }
 
 .fade-in-right {

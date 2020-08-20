@@ -3,7 +3,7 @@ import { GlobalContext } from '../Context/GlobalState';
 import { Container, Row, Col } from 'react-bootstrap';
 
 const IncomeExpenses = (props) => {
-	const { transactions } = useContext(GlobalContext);
+	const { transactions, currency } = useContext(GlobalContext);
   	const amounts = transactions.map(transaction => transaction.amount);
   	const Income = amounts
   		.filter(item => item > 0)
@@ -16,18 +16,18 @@ const IncomeExpenses = (props) => {
   		.toFixed(2)
 
   	return (
-  		<Container className="expense-income">
+  		<Container className="expense-income bg-warning">
         <Row>
           <Col>
     	  		<div>
     		    	<h4>Income</h4>
-    		    	<p>{Income} Euro</p>
+    		    	<h5>{currency} {Income}</h5>
     		    </div>
           </Col>
   		    <Col>
             <div>
     		    	<h4>Expense</h4>
-    		    	<p>{Expense} Euro</p>
+    		    	<h5>{currency} {Expense}</h5>
     		    </div>
           </Col>
         </Row>

@@ -19,15 +19,15 @@ function App() {
           </Container>
         </Row>
         <Row>
-          <Col className='right-border'>
-            <Balance />
-            <IncomeExpenses />
+          <Col className='rounded bg-warning pt-5 pl-5'>
+              <Balance />
+              <IncomeExpenses className='bg-danger'/>
           </Col>
           <Col>
             <AddTransactions />
           </Col>
         </Row>
-        <Row>
+        <Row className='mt-5'>
           <TransactionList />
         </Row>
       </Container>

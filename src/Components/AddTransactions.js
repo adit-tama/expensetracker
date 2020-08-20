@@ -1,12 +1,12 @@
 import React, { useContext } from 'react';
 import { GlobalContext } from '../Context/GlobalState';
-import { Container, Form, Button } from 'react-bootstrap';
+import { Form, Button } from 'react-bootstrap';
 
 const AddTransactions = (props) => {
-	const [text, setText] = React.useState('');
-	const [amount, setAmount] = React.useState();
-	const { validText, setValidText } = React.useState('');
-	const { validAmount, setValidAmount } = React.useState('');
+	const [ text, setText ] = React.useState('');
+	const [ amount, setAmount ] = React.useState('');
+	const [ validText, setValidText ] = React.useState(false);
+	const [ validAmount, setValidAmount ] = React.useState(false);
 	const { addTransaction } = useContext(GlobalContext);
 
 	const onSubmit = e =>{
@@ -14,20 +14,23 @@ const AddTransactions = (props) => {
 		const newTransaction = {
 			id: Math.floor(Math.random() * 10000000),
 			text,
-			amount
+			amount,
 		}
 
-		!text && setValidText(false)
-		!amount && setValidAmount(false)
-
-		
+		if(!text) { setValidText(true) } else { setValidText(false) }
+		if(!amount) { setValidAmount(true) } else { setValidAmount(false) }
+		if(text && amount) {
+			addTransaction(newTransaction) 
+			setAmount('')
+			setText('')
+		}
 	}
 	return (
-	    <Container>
+	    <div className='pl-2'>
 	    	<h3>Transaction</h3>
-	    	<Form onSubmit={onSubmit}>
+	    	<Form>
 	    		<Form.Group>
-	    			<Form.Label className={text ? "fade-in-right" : "visibility-none"}>
+	    			<Form.Label className={text ? "fade-in-right " : "visibility-none"}>
 	    				Description
 	    			</Form.Label>
 	    			<Form.Control 
@@ -36,24 +39,36 @@ const AddTransactions = (props) => {
 	    				value={text}
 	    				onChange={(e) => {setText(e.target.value)}}
 	    			/>
+	    			<Form.Text className={validText ? "fade-in-right text-danger" : "visibility-none"}>
+	    				Please fill the description field
+	    			</Form.Text>
 	    		</Form.Group>
 	    		<Form.Group>
-	    			<Form.Label className={amount ? "fade-in-right" : "visibility-none"}>
-	    				Amount
-	    			</Form.Label>
-	    			<Form.Control 
-	    				type="number" 
-	    				placeholder="enter amount"
-	    				value={amount}
-	    				onChange={(e) => {setAmount(parseInt(e.target.value))}}
-	    			/>
+	    			<Form.Row>
+		    			<Form.Label className={amount ? "fade-in-right" : "visibility-none"}>
+				    				Amount
+				    	</Form.Label>
+			    	</Form.Row>
+	    			<Form.Row>
+		    			<Form.Control 
+		    				type="number" 
+		    				placeholder="enter amount"
+		    				value={amount}
+		    				onChange={(e) => {setAmount(parseInt(e.target.value))}}
+		    			/>
+	    			</Form.Row>
+	    			<Form.Row>
+	    				<Form.Text className={validAmount ? "fade-in-right text-danger" : "visibility-none"}>
+		    				Please fill the amount field
+		    			</Form.Text>
+	    			</Form.Row>
 	    		</Form.Group>
-	    		<Form.Group>
-	    			<br />
-	    			<Button>Add Transaction</Button>
+	    		<br />
+	    		<Form.Group className='d-flex justify-content-end'>
+	    			<Button onClick={onSubmit}>Add Transaction</Button>
 	    		</Form.Group>
 	    	</Form>
-	    </Container>
+	    </div>
 	)
 }
 

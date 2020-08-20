@@ -1,5 +1,4 @@
 export default (state, action) => {
-	console.log(action)
 	switch(action.type) {
 		case 'DELETE_TRANSACTION':
 			return {
@@ -14,6 +13,11 @@ export default (state, action) => {
 			return {
 				...state,
 				transactions: [action.payload,...state.transactions]
+			}
+		case 'SET_CURRENCY':
+			return {
+				...state,
+				currency: action.payload
 			}
 		default:
 			return state;

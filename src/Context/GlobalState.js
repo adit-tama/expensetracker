@@ -3,10 +3,8 @@ import AppReducer from './AppReducer';
 
 // initial state
 const initialState = {
-	transactions: [
-		{ id: 1, text: 'Flower', amount: -23 },
-		{ id: 2, text: 'Flower', amount: 300 }
-	]
+	transactions: [],
+	currency: "€"
 }
 
 // Create Context
@@ -24,9 +22,15 @@ export const GlobalProvider = ({ children }) => {
 	}
 
 	function addTransaction(data) {
-		console.log(data)
 		dispatch({
 			type: 'ADD_TRANSACTION',
+			payload: data,
+		})
+	}
+
+	function setCurrency(data) {
+		dispatch({
+			type: 'SET_CURRENCY',
 			payload: data,
 		})
 	}
@@ -34,6 +38,8 @@ export const GlobalProvider = ({ children }) => {
 	return(
 		<GlobalContext.Provider value={{
 			transactions: state.transactions,
+			currency: state.currency,
+			setCurrency,
 			deleteTransaction,
 			addTransaction
 		}}>
