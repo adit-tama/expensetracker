@@ -26,7 +26,7 @@ const TransactionList = (props) => {
 					<h3>History</h3>
 					<OverlayTrigger trigger={["hover", "hover"]} placement="right" overlay={popover}>
 						<sup>
-							<Image className="ml-3" src={tooltipsicon} rounded />
+							<Image className="ml-1" src={tooltipsicon} rounded />
 						</sup>
 					</OverlayTrigger>
 				</div>
