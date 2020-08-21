@@ -25,14 +25,15 @@ const Balance = () => {
 	},[currency])
 
 	const amounts = snapshots.map(transaction =>  { 
-		if (transaction.val().currency === "$") {
-			return transaction.val().amount / rate.rates.USD
-		} else if (transaction.val().currency === "€") {
-			return transaction.val().amount / (rate.rates.EUR ? rate.rates.EUR : 1)
-		} else {
-			return transaction.val().amount / rate.rates.IDR
-		}
-	});
+      if (transaction.val().currency === "$") {
+        return transaction.val().amount / (rate.rates.USD ? rate.rates.USD : 1)
+      } else if (transaction.val().currency === "€") {
+        return transaction.val().amount / (rate.rates.EUR ? rate.rates.EUR : 1)
+      } else {
+        return transaction.val().amount / (rate.rates.IDR ? rate.rates.IDR : 1)
+      }
+      
+    });
 	const total = amounts.reduce((acc, item) => (acc += item), 0).toFixed(0);
 
   	return (
