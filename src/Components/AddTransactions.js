@@ -7,20 +7,22 @@ const AddTransactions = (props) => {
 	const [ amount, setAmount ] = React.useState('');
 	const [ validText, setValidText ] = React.useState(false);
 	const [ validAmount, setValidAmount ] = React.useState(false);
-	const { addTransaction } = useContext(GlobalContext);
+	const { transactionsData, currency } = useContext(GlobalContext);
 
 	const onSubmit = e =>{
 		e.preventDefault();
 		const newTransaction = {
 			id: Math.floor(Math.random() * 10000000),
-			text,
+			description: text,
+			currency, 
 			amount,
 		}
 
 		if(!text) { setValidText(true) } else { setValidText(false) }
 		if(!amount) { setValidAmount(true) } else { setValidAmount(false) }
 		if(text && amount) {
-			addTransaction(newTransaction) 
+			var newPostRef = transactionsData.push();
+			newPostRef.set(newTransaction);
 			setAmount('')
 			setText('')
 		}

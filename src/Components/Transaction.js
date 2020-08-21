@@ -8,14 +8,14 @@ const Transaction = ({ transaction }) => {
 
   	return (
   		<tr className='fade-in-right'>
-  			<td className={ expense.includes('-') ? 'expense-border' : 'income-border'}>{ transaction.text }</td>
-  			<td>{ transaction.amount }</td>
-  			<td>{ currency }</td>
-  			<Button 
+  			<td className={ expense.includes('-') ? 'expense-border' : 'income-border text-center'}>{ transaction.description }</td>
+  			<td className="text-center">{ transaction.amount }</td>
+  			<td className="text-center">{ transaction.currency }</td>
+  			<td className="text-center"><Button 
   				variant="outline-danger" 
   				onClick={() => deleteTransaction(transaction.id)}
   				size="sm"
-  			>x</Button>
+  			>x</Button></td>
 	    </tr>
   	)
 }

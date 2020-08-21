@@ -12,7 +12,6 @@ const Header = (props) => {
 		    </h1>
 		    <div className='d-flex align-items-center justify-content-between'>
 	    		<Currency />
-	    		<Login />
 	    	</div>
 	    </Row>
     </Container>

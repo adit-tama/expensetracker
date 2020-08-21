@@ -1,9 +1,10 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { GlobalContext } from '../Context/GlobalState';
 import Transaction from './Transaction';
 import { Popover, Container, Table, OverlayTrigger, Image, Row } from 'react-bootstrap';
 import tooltipsicon from './Assets/tooltips.svg';
-import Save from './Save'
+import Save from './Save';
+import { useList } from 'react-firebase-hooks/database';
 
 const popover = (
   <Popover id="popover-basic">
@@ -16,7 +17,9 @@ const popover = (
 );
 
 const TransactionList = (props) => {
-	const { transactions } = useContext(GlobalContext)
+	const { transactionsData, test, addTransaction } = useContext(GlobalContext);
+	const [transactions, setTransactions] = useState([]);
+	const [snapshots, loading, error] = useList(transactionsData);
 
 	return (
 		<Container>
@@ -30,26 +33,32 @@ const TransactionList = (props) => {
 						</sup>
 					</OverlayTrigger>
 				</div>
-				<Save />
 			</Row>
 			</Container>
-			<Table hover size="sm">
-			  <thead>
-			    <tr>
-			      <th>Description</th>
-			      <th>Amount</th>
-			      <th>Currency</th>
-			    </tr>
-			  </thead>
-			  <tbody>
-			    {transactions.map(transaction =>(
-					<Transaction 
-						key={transaction.id} 
-						transaction={transaction} 
-					/>
-				))}
-			  </tbody>
-			</Table>
+			{error && <strong>Error: {error}</strong>}
+        	{loading && <span>List: Loading...</span>}
+        	{!loading && snapshots && (
+        		<>
+				<Table hover size="sm">
+				  <thead>
+				    <tr>
+				      <th className="text-center">Description</th>
+				      <th className="text-center">Amount</th>
+				      <th className="text-center">Currency</th>
+				      <th className="text-center">Action</th>
+				    </tr>
+				  </thead>
+				  <tbody>
+				    { snapshots.map((snapshot, index) =>{
+						return (<Transaction 
+							key={snapshot.key} 
+							transaction={snapshot.val()} 
+						/>)
+					}) }
+				  </tbody>
+				</Table>
+				</> )
+        	}
 			<ul>
 				
 			</ul>
