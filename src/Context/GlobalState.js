@@ -1,5 +1,6 @@
-import React, { createContext, useState, useEffect } from 'react';
-import * as firebase from 'firebase';
+import React, { createContext, useState } from 'react';
+import firebase from 'firebase/app';
+import 'firebase/database';
 
 // initial state
 const initialState = {
@@ -20,7 +21,6 @@ const firebaseConfig = {
   };
 firebase.initializeApp(firebaseConfig);
 const db = firebase.database()
-const transactionsData = db.ref('users/praditya/transactions');
 
 // Create Context
 export const GlobalContext = createContext(initialState);

@@ -1,13 +1,12 @@
 import React, { useContext } from 'react';
 import { Container, Row } from 'react-bootstrap';
 import Currency from './Currency';
-import Login from './Login';
 import Logout from './Logout';
 import { GlobalContext } from '../Context/GlobalState';
 
 const Header = (props) => {
 	const date = new Date().toJSON().slice(0,10).replace(/-/g,'/');
-	const { db, auth } = useContext(GlobalContext);
+	const { auth } = useContext(GlobalContext);
 	return (
 	  	<Container>
 	  		<Row className='d-flex align-items-center justify-content-between'>

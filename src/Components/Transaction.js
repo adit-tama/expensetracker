@@ -13,7 +13,7 @@ const Transaction = ({ transaction }) => {
         var pkey = childSnapshot.key; 
 
         //check if remove this child
-        if(childSnapshot.val().id == transaction.id){
+        if(childSnapshot.val().id === transaction.id){
           db.ref(`users/${auth}/transactions/${pkey}`).remove();
         }
 

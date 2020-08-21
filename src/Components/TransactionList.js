@@ -1,9 +1,8 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import { GlobalContext } from '../Context/GlobalState';
 import Transaction from './Transaction';
 import { Popover, Container, Table, OverlayTrigger, Image, Row } from 'react-bootstrap';
 import tooltipsicon from './Assets/tooltips.svg';
-import Save from './Save';
 import { useList } from 'react-firebase-hooks/database';
 
 const popover = (
@@ -18,7 +17,6 @@ const popover = (
 
 const TransactionList = (props) => {
 	const { db, auth } = useContext(GlobalContext);
-	const [transactions, setTransactions] = useState([]);
 	const [snapshots, loading, error] = useList(db.ref(`users/${auth}/transactions`));
 
 	return (
