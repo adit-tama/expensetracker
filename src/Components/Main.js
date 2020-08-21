@@ -33,7 +33,7 @@ const Application = () => {
 }
 
 function Main() {
-  const { currency, auth } = useContext(GlobalContext);
+  const { auth } = useContext(GlobalContext);
 
   return (
     <>

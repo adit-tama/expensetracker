@@ -49,13 +49,15 @@ const IncomeExpenses = (props) => {
           <Col>
     	  		<div>
     		    	<h4>Income</h4>
-    		    	<h5>{currency} {Income}</h5>
+              {loading && <h5>Loading...</h5>}
+    		    	{!error && <h5>{currency} {Income}</h5> }
     		    </div>
           </Col>
   		    <Col>
             <div>
     		    	<h4>Expense</h4>
-    		    	<h5>{currency} {Expense}</h5>
+              {loading && <h5>Loading...</h5>}
+    		    	{!error && <h5>{currency} {Expense}</h5> }
     		    </div>
           </Col>
         </Row>

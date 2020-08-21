@@ -1,18 +1,13 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import { Button, Container, Form, Card, Alert } from 'react-bootstrap';
 import { GlobalContext } from '../Context/GlobalState';
 
 const Login = (props) => {
 	const [ username, setusername ] = React.useState('');
-	const [ password, setPassword ] = React.useState('');
 	const [ validusername, setValidusername ] = React.useState(false);
-	const [ validpassword, setValidPassword ] = React.useState(false);
 	const [ alert, setAlert ] = React.useState(false);
-	const [show, setShow] = useState(false);
-	const { addTransaction, db, changeAuth } = useContext(GlobalContext);
+	const { db, changeAuth } = useContext(GlobalContext);
 
-	const handleClose = () => setShow(false);
-  	const handleShow = () => setShow(true);
 	const onSubmit = e => {
 		e.preventDefault();
 		if(!username) { setValidusername(true) } else { setValidusername(false) }
