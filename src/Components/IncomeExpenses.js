@@ -1,10 +1,38 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { GlobalContext } from '../Context/GlobalState';
 import { Container, Row, Col } from 'react-bootstrap';
+import { useList } from 'react-firebase-hooks/database';
 
 const IncomeExpenses = (props) => {
-	const { transactions, currency } = useContext(GlobalContext);
-  	const amounts = transactions.map(transaction => transaction.amount);
+	const { db,auth,currency } = useContext(GlobalContext);
+  const [snapshots, loading, error] = useList(db.ref(`users/${auth}/transactions`));
+  const [ rate, setRate ] = useState({})
+  
+  useEffect(() => {
+    const getRate = async () => {
+      let val;
+      if(currency === "$") {
+        val = "USD"
+      } else if (currency === "€") {
+        val = "EUR"
+      } else {
+        val = "IDR"
+      }
+      return await fetch('https://api.exchangeratesapi.io/latest?base='+val).then(res => res.json())
+    }
+    getRate().then((a) => {setRate(a)})
+  },[currency])
+
+  	const amounts = snapshots.map(transaction =>  { 
+      if (transaction.val().currency === "$") {
+        return transaction.val().amount / (rate.rates.USD ? rate.rates.USD : 1)
+      } else if (transaction.val().currency === "€") {
+        return transaction.val().amount / (rate.rates.EUR ? rate.rates.EUR : 1)
+      } else {
+        return transaction.val().amount / (rate.rates.IDR ? rate.rates.IDR : 1)
+      }
+      
+    });
   	const Income = amounts
   		.filter(item => item > 0)
   		.reduce((acc, item) => (acc += item),0)
