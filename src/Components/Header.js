@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { Container, Row } from 'react-bootstrap';
 import Currency from './Currency';
 import Login from './Login';
+import Logout from './Logout';
 import { GlobalContext } from '../Context/GlobalState';
 
 const Header = (props) => {
@@ -15,7 +16,10 @@ const Header = (props) => {
 			    </h1>
 			    <div className='d-flex flex-column align-items-end justify-content-center'>
 			    	<p className='mr-2 text-center'>{auth} | {date}</p>
-		    		<Currency />
+			    	<div className='d-flex align-items-end justify-content-center'>
+			    		<Currency />
+			    		<Logout />
+			    	</div>
 		    	</div>
 		    </Row>
 	    </Container>
