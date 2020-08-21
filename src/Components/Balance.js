@@ -39,7 +39,8 @@ const Balance = () => {
   	return (
 	  	<Container className='bg-warning'>
 			<h4>Your Balance</h4>
-			<h2 className={"bold"}>{`${currency} ${total}`}</h2>
+			{ loading && <h4>Loading...</h4>}
+			{ !error && <h2 className={"bold"}>{`${currency} ${total}`}</h2> }
 	    </Container>
   	)
 }

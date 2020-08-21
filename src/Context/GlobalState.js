@@ -10,14 +10,14 @@ const initialState = {
 
 //init firebase
 const firebaseConfig = {
-    apiKey: "AIzaSyDhcfi6uhayNWDvlxVwLHHSE8IGNw_HSfE",
-    authDomain: "expensetracker-3051e.firebaseapp.com",
-    databaseURL: "https://expensetracker-3051e.firebaseio.com",
-    projectId: "expensetracker-3051e",
-    storageBucket: "expensetracker-3051e.appspot.com",
-    messagingSenderId: "922580633686",
-    appId: "1:922580633686:web:5cf851bbff0fbc133013f7",
-    measurementId: "G-6MK3X7515Q"
+    apiKey: process.env.REACT_APP_APIKEY,
+    authDomain: process.env.REACT_APP_AUTHDOMAIN,
+    databaseURL: process.env.REACT_APP_DBURL,
+    projectId: process.env.REACT_APP_PROJECT_ID,
+    storageBucket: process.env.REACT_APP_BUCKET,
+    messagingSenderId: process.env.REACT_APP_MESSENGER,
+    appId: process.env.REACT_APP_APP_ID,
+    measurementId: process.env.REACT_APP_MES_ID
   };
 firebase.initializeApp(firebaseConfig);
 const db = firebase.database()
