@@ -3,14 +3,13 @@ import { GlobalContext } from '../Context/GlobalState';
 import { Form } from 'react-bootstrap';
 
 const Currency = (props) => {
-	const [ currency ] = React.useState('€');
-	const { setCurrency } = useContext(GlobalContext);
+	const { currency, changeCurrency } = useContext(GlobalContext);
 	return (
 		<Form className="mr-2">
 			<Form.Control 
 				as="select" 
 				defaultValue={currency}
-				onChange={(e) => setCurrency(e.target.value)}
+				onChange={(e) => changeCurrency(e.target.value)}
 			>
 				<option value={"$"}>$</option>
 				<option value={"€"}>€</option>

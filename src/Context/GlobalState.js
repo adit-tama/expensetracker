@@ -1,5 +1,4 @@
-import React, { createContext, useReducer, useState } from 'react';
-import AppReducer from './AppReducer';
+import React, { createContext, useState, useEffect } from 'react';
 import * as firebase from 'firebase';
 
 // initial state
@@ -23,42 +22,23 @@ firebase.initializeApp(firebaseConfig);
 const db = firebase.database()
 const transactionsData = db.ref('users/praditya/transactions');
 
-
 // Create Context
 export const GlobalContext = createContext(initialState);
 
 //Provider Components
 export const GlobalProvider = ({ children }) => {
-	const [state, dispatch] = useReducer(AppReducer,initialState);
-	const [test,setTest] = useState(false)
-
-	function deleteTransaction(id) {
-		dispatch({
-			type: 'DELETE_TRANSACTION',
-			payload: id,
-		})
-	}
-
-	function addTransaction(data) {
-		setTest(prevState => !prevState)
-	}
-
-	function setCurrency(data) {
-		dispatch({
-			type: 'SET_CURRENCY',
-			payload: data,
-		})
-	}
-
+	const [auth,setAuth] = useState(false)
+	const [currency, setCurrency] = useState('$')
+	const changeAuth = (value) => { setAuth(value) }
+	const changeCurrency = (value) => { setCurrency(value) }
+	
 	return(
 		<GlobalContext.Provider value={{
-			test,
-			transactionsData,
-			transactions: state.transactions,
-			currency: state.currency,
-			setCurrency,
-			deleteTransaction,
-			addTransaction
+			changeAuth,
+			db,
+			auth,
+			currency,
+			changeCurrency
 		}}>
 			{ children }
 		</GlobalContext.Provider>

@@ -17,9 +17,9 @@ const popover = (
 );
 
 const TransactionList = (props) => {
-	const { transactionsData, test, addTransaction } = useContext(GlobalContext);
+	const { db, auth } = useContext(GlobalContext);
 	const [transactions, setTransactions] = useState([]);
-	const [snapshots, loading, error] = useList(transactionsData);
+	const [snapshots, loading, error] = useList(db.ref(`users/${auth}/transactions`));
 
 	return (
 		<Container>
