@@ -1,5 +1,7 @@
-import { useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import Logo from "../Logo";
+import { useRouter } from "next/router";
+import { useState } from "react";
 
 type LoginModel = {
   email: string;
@@ -7,13 +9,25 @@ type LoginModel = {
 };
 
 const LoginForm = () => {
+  const router = useRouter();
   const {
     register,
+    handleSubmit,
     formState: { errors },
   } = useForm<LoginModel>();
 
+  const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const onSubmit: SubmitHandler<LoginModel> = async (value) => {
+    console.log(value);
+  };
+
   return (
-    <div className="w-full max-w-[375px] p-4 flex-col justify-start items-start gap-6 inline-flex">
+    <form
+      className="w-full max-w-[375px] p-4 flex-col justify-start items-start gap-6 inline-flex"
+      onSubmit={handleSubmit(onSubmit)}
+    >
       <Logo />
       <div className="self-stretch flex-col justify-start items-start gap-5 flex">
         <div className="self-stretch flex-col justify-start items-start gap-2 flex">
@@ -36,7 +50,12 @@ const LoginForm = () => {
             name="email"
             required
             className="px-2 py-3 self-stretch text-stone-500 text-sm font-normal leading-[14px] bg-stone-100 w-full"
-          />
+          />{" "}
+          {errors.email && (
+            <p role="alert" className="text-xs text-red-500">
+              {errors.email.message}
+            </p>
+          )}
         </div>
       </div>
       <div className="self-stretch flex-col justify-start items-start gap-5 flex">
@@ -47,14 +66,10 @@ const LoginForm = () => {
           <div className="bg-stone-100 rounded justify-start flex w-full">
             <input
               {...register("password", {
-                required: "Email is required",
-                pattern: {
-                  value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/i,
-                  message: "Invalid email address",
-                },
+                required: "Password is required",
               })}
               id="password"
-              placeholder="mail@example.com"
+              placeholder="*******"
               name="password"
               type="password"
               required
@@ -63,12 +78,15 @@ const LoginForm = () => {
           </div>
         </div>
       </div>
-      <button className="self-stretch px-6 py-3.5 bg-red-400 rounded justify-center items-center inline-flex">
+      <button
+        className="self-stretch px-6 py-3.5 bg-red-400 rounded justify-center items-center inline-flex"
+        type="submit"
+      >
         <span className="text-red-50 text-sm font-normal leading-[14px]">
           Sign In
         </span>
       </button>
-    </div>
+    </form>
   );
 };
 
