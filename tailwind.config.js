@@ -18,10 +18,7 @@ module.exports = {
         ["x-small"]: "11.11px",
       },
       fontFamily: {
-        poppins: ["Poppins", "sans-serif"],
         inter: ["Inter Variable", "sans-serif"],
-        lato: ["Lato", "sans-serif"],
-        noto: ["Noto Sans Variable", "sans-serif"],
       },
       fontSize: {
         sm: "0.833rem",
@@ -56,5 +53,4 @@ module.exports = {
     },
   },
   plugins: [],
-  purge: ["./pages/**/*.{js,ts,jsx,tsx}", "./components/**/*.{js,ts,jsx,tsx}"],
 };
