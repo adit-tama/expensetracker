@@ -2,6 +2,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import Logo from "../Logo";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import { loginUser } from "../../data/frontend/requests";
 
 type LoginModel = {
   email: string;
@@ -20,7 +21,7 @@ const LoginForm = () => {
   const [loading, setLoading] = useState(false);
 
   const onSubmit: SubmitHandler<LoginModel> = async (value) => {
-    console.log(value);
+    loginUser(value);
   };
 
   return (

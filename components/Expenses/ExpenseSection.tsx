@@ -11,8 +11,8 @@ const ExpenseSection = () => (
       </button>
     </div>
     <div className="flex flex-col gap-3">
-      {ExpenseItemCardModelFactory.buildList(4).map((card) => (
-        <ExpenseItemCard {...card} />
+      {ExpenseItemCardModelFactory.buildList(4).map((card, index) => (
+        <ExpenseItemCard {...card} key={index} />
       ))}
     </div>
   </div>
