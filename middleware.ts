@@ -1,8 +1,9 @@
 import type { NextRequest } from "next/server";
-import requestsHandler from "./data/backend/middlewares/requestsHandler";
+import requestsApiHandler from "./utils/middlewares/requestsApiHandler";
+import requestsPageHandler from "./utils/middlewares/requestsPageHander";
 
 export const middleware = async (request: NextRequest) =>
-  requestsHandler(request);
+  requestsApiHandler(request) || requestsPageHandler();
 
 export const config = {
   matcher: [

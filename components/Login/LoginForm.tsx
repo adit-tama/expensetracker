@@ -2,7 +2,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import Logo from "../Logo";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { loginUser } from "../../data/frontend/requests";
+import { loginUser } from "../../utils/client/requests";
 
 type LoginModel = {
   email: string;
