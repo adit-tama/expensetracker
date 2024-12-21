@@ -1,9 +1,7 @@
 import React from "react";
-import { ExpenseItemCardModel } from "./types";
+import { ExpenseItemCardModel } from "../../utils/data/models";
 
-type Props = ExpenseItemCardModel;
-
-const ExpenseItemCard = ({ date, amount, ctaText }: Props) => (
+const ExpenseItemCard = ({ date, amount, ctaText }: ExpenseItemCardModel) => (
   <div className="h-[66px] w-full flex flex-row justify-between">
     <div className="flex items-center gap-4">
       <img

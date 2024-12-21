@@ -12,7 +12,9 @@ const createPostRequest = (path: string) => async (value: object) => {
       [HEADERS.X_CSRF_TOKEN]: csrfToken,
     },
     body: JSON.stringify(value),
-  });
+  })
+    .then((data) => data.json())
+    .then(console.log);
 };
 
-export const loginUser = createPostRequest("/api/login");
+export const signInRequest = createPostRequest("/api/login");
