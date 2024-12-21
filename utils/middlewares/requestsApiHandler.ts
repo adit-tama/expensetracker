@@ -16,7 +16,7 @@ const requestsApiHandler = async (request: NextRequest) => {
     });
   }
 
-  return NextResponse.rewrite(new URL("/api/not-found", request.url));
+  return NextResponse.rewrite(new URL("/404", request.url));
 };
 
 export default requestsApiHandler;
