@@ -7,5 +7,5 @@ export default async function handler(
 ) {
   await validateCSRFToken(req, res);
 
-  res.status(200).json({ message: "Login successful" });
+  return res.status(200).json({ message: "Expese successful" });
 }

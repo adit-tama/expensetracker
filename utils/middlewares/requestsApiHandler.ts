@@ -1,10 +1,22 @@
-import { NextResponse } from "next/server";
-import type { NextRequest } from "next/server";
-import { HTTP_STATUS, WHITELISTED_PATH } from "../constants";
-import { validateCSRFToken, validateCSRFTokenTest } from "./helper";
+import { NextRequest, NextResponse } from "next/server";
+import { validateApiPath } from "./helper";
+
+const PUBLIC_API = ["/api/login", "/api/register", "/api/not-found"];
 
 const requestsApiHandler = async (request: NextRequest) => {
-  return validateCSRFTokenTest(request);
+  if (validateApiPath(request)) {
+    return null;
+  }
+
+  if (PUBLIC_API.includes(request.nextUrl.pathname)) {
+    return NextResponse.next({
+      request: {
+        headers: request.headers,
+      },
+    });
+  }
+
+  return NextResponse.rewrite(new URL("/api/not-found", request.url));
 };
 
 export default requestsApiHandler;

@@ -1,3 +1,7 @@
+export const SUPABASE_URL = "https://psoicjsqmouihpuyjozu.supabase.co";
+export const SUPABASE_ANON_KEY =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBzb2ljanNxbW91aWhwdXlqb3p1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzQ1NjI0NTIsImV4cCI6MjA1MDEzODQ1Mn0.7rlOed2R4Qkf9ZKswNbFZBALCOdOlUPR8FSBAYwswY0";
+
 export const COOKIES_NAMES = {
   AUTH: "Auth",
 } as const;
@@ -6,10 +10,9 @@ export const HEADERS = {
   ACCEPT_LANGUAGE: "Accept-Language",
   CACHE_CONTROL: "Cache-Control",
   CONTENT_TYPE: "Content-Type",
-  X_CSRF_TOKEN: "X-CSRF-Token",
+  X_CSRF_TOKEN: "x-csrf-token",
+  AUTHORIZATION: "Authorization",
 } as const;
-
-export const WHITELISTED_PATH = ["/api/login", "/api/register"];
 
 export enum HTTP_STATUS {
   Ok = 200,
@@ -32,3 +35,5 @@ export enum HTTP_STATUS {
   ServiceUnavailable = 503,
   GatewayTimeout = 504,
 }
+
+export const ACTIVE_PATHS = ["/", "/login", "/register", "/404"];

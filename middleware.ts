@@ -3,10 +3,10 @@ import requestsApiHandler from "./utils/middlewares/requestsApiHandler";
 import requestsPageHandler from "./utils/middlewares/requestsPageHander";
 
 export const middleware = async (request: NextRequest) =>
-  requestsApiHandler(request) || requestsPageHandler();
+  (await requestsApiHandler(request)) || requestsPageHandler(request);
 
 export const config = {
   matcher: [
-    "/((?!_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt).*)",
+    "/((?!_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt|/).*)",
   ],
 };
