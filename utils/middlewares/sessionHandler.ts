@@ -1,29 +1,26 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createSupabaseServerClient } from "@/utils/supabase/server";
+import { COOKIES_NAMES } from "../constants";
 
 export const sessionHandler = async (request: NextRequest) => {
-  try {
-    let response = NextResponse.next({
-      request: {
-        headers: request.headers,
-      },
-    });
+  let response = NextResponse.next({
+    request: {
+      headers: request.headers,
+    },
+  });
 
-    const supabaseClient = await createSupabaseServerClient(response, request);
+  const token = request.cookies.get(COOKIES_NAMES.ACCESS_TOKEN)?.value;
 
-    const user = await supabaseClient.auth.getUser();
+  if (!token) {
+    return NextResponse.redirect(new URL("/login", request.url));
+  }
 
-    if (user.error) {
-      return NextResponse.redirect(new URL("/login", request.url));
-    }
+  const supabaseClient = await createSupabaseServerClient(response, request);
 
-    return response;
-  } catch (e) {
-    return NextResponse.next({
-      request: {
-        headers: request.headers,
-      },
-    });
+  const user = await supabaseClient.auth.getUser(token);
+
+  if (user.error) {
+    return NextResponse.redirect(new URL("/login", request.url));
   }
 };
 

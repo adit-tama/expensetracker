@@ -1,5 +1,5 @@
 import { HEADERS } from "@/utils/constants";
-import { AuthDto, AuthResponse } from "../data/dtos/auth";
+import { AuthResponse } from "../data/dtos/auth";
 import { AuthPayloadModel } from "../data/models";
 
 const createPostRequest =

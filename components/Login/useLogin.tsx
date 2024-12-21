@@ -5,6 +5,7 @@ import Cookies from "universal-cookie";
 import { transfromAuthDto } from "../../utils/data/transformers/auth";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { COOKIES_NAMES } from "../../utils/constants";
 
 const useLogin = () => {
   const {
@@ -29,8 +30,8 @@ const useLogin = () => {
     }
 
     const { accessToken, refreshToken } = transfromAuthDto(data);
-    cookiesStore.set("__access_token", accessToken);
-    cookiesStore.set("__refresh_token", refreshToken);
+    cookiesStore.set(COOKIES_NAMES.ACCESS_TOKEN, accessToken);
+    cookiesStore.set(COOKIES_NAMES.REFRESH_TOKEN, refreshToken);
     setIsLoading(false);
     router.push("/");
   });
