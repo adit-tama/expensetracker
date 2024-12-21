@@ -1,23 +1,13 @@
-import { useForm } from "react-hook-form";
 import Logo from "@/components/Layout/Logo";
-import { useState } from "react";
-import { signInRequest } from "@/requests";
-import { AuthPayloadModel } from "@/models/auth";
+import useLogin from "./useLogin";
 
 const LoginForm = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<AuthPayloadModel>();
-
-  const [message, setMessage] = useState("");
-  const [loading, setLoading] = useState(false);
+  const { onSubmit, register, errors, isLoading } = useLogin();
 
   return (
     <form
       className="w-full max-w-[375px] p-4 flex-col justify-start items-start gap-6 inline-flex"
-      onSubmit={handleSubmit(async (value) => signInRequest(value))}
+      onSubmit={onSubmit}
     >
       <Logo />
       <div className="self-stretch flex-col justify-start items-start gap-5 flex">
@@ -74,9 +64,10 @@ const LoginForm = () => {
       <button
         className="self-stretch px-6 py-3.5 bg-red-400 rounded justify-center items-center inline-flex"
         type="submit"
+        disabled={isLoading}
       >
         <span className="text-red-50 text-sm font-normal leading-[14px]">
-          Sign In
+          {isLoading ? "Signing in ..." : "Sign In"}
         </span>
       </button>
     </form>

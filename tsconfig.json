@@ -18,6 +18,7 @@
     "paths": {
       "@/transformers/*": ["utils/data/transformers/*"],
       "@/models/*": ["utils/data/models/*"],
+      "@/dtos/*": ["utils/data/dtos/*"],
       "@/utils/*": ["utils/*"],
       "@/components/*": ["components/*"],
       "@/styles/*": ["styles/*"],
