@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createSupabaseServerClient } from "../supabase/server";
+import { createSupabaseServerClient } from "@/utils/supabase/server";
 
 export const sessionHandler = async (request: NextRequest) => {
   try {

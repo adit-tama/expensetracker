@@ -1,5 +1,5 @@
 import { NextRequest } from "next/server";
-import { HEADERS } from "../constants";
+import { HEADERS } from "@/utils/constants";
 
 export const validateCSRFToken = (request: NextRequest) =>
   request.headers.get(HEADERS.X_CSRF_TOKEN) ===

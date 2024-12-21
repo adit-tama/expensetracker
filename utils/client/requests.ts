@@ -1,4 +1,4 @@
-import { HEADERS } from "../constants";
+import { HEADERS } from "@/utils/constants";
 
 const createPostRequest = (path: string) => async (value: object) => {
   const csrfToken = process.env.NEXT_PUBLIC_CSRF_TOKEN;

@@ -1,7 +1,6 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextRequest, NextResponse } from "next/server";
-import { SUPABASE_ANON_KEY, SUPABASE_URL } from "../constants";
-import { cookies } from "next/headers";
+import { SUPABASE_ANON_KEY, SUPABASE_URL } from "@/utils/constants";
 import { createClient, SupabaseClientOptions } from "@supabase/supabase-js";
 
 export async function createSupabaseServerClient(

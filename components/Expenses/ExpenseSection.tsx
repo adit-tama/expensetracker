@@ -1,7 +1,7 @@
 import React from "react";
-import { ExpenseItemCardModelFactory } from "../../utils/data/transformers";
+import { ExpenseItemCardModelFactory } from "@/transformers/expense";
 
-import ExpenseItemCard from "./ExpenseItemCard";
+import ExpenseItemCard from "@/components/Expenses/ExpenseItemCard";
 
 const ExpenseSection = () => (
   <div>

@@ -1,9 +1,9 @@
-import { SubmitHandler, useForm } from "react-hook-form";
-import Logo from "../Layout/Logo";
+import { useForm } from "react-hook-form";
+import Logo from "@/components/Layout/Logo";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { signInRequest } from "../../utils/client/requests";
-import { AuthPayloadModel } from "../../utils/data/models";
+import { signInRequest } from "@/requests";
+import { AuthPayloadModel } from "@/models/auth";
 
 const RegisterForm = () => {
   const router = useRouter();

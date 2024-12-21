@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { ACTIVE_PATHS } from "../constants";
+import { ACTIVE_PATHS } from "@/utils/constants";
 
 const requestsPageHandler = async (request: NextRequest) => {
   if (!ACTIVE_PATHS.includes(request.nextUrl.pathname)) {

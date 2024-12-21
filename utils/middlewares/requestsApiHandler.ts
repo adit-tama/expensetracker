@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { validateApiPath, validateCSRFToken } from "./helper";
+import { validateApiPath, validateCSRFToken } from "@/utils/middlewares/helper";
 
 const PUBLIC_API = ["/api/login", "/api/register", "/api/not-found"];
 

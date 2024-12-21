@@ -1,8 +1,8 @@
 import { useForm } from "react-hook-form";
-import Logo from "../Layout/Logo";
+import Logo from "@/components/Layout/Logo";
 import { useState } from "react";
-import { signInRequest } from "../../utils/client/requests";
-import { AuthPayloadModel } from "../../utils/data/models";
+import { signInRequest } from "@/requests";
+import { AuthPayloadModel } from "@/models/auth";
 
 const LoginForm = () => {
   const {

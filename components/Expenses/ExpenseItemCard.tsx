@@ -1,5 +1,5 @@
 import React from "react";
-import { ExpenseItemCardModel } from "../../utils/data/models";
+import { ExpenseItemCardModel } from "@/models/expense";
 
 const ExpenseItemCard = ({ date, amount, ctaText }: ExpenseItemCardModel) => (
   <div className="h-[66px] w-full flex flex-row justify-between">

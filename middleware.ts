@@ -1,6 +1,6 @@
 import type { NextRequest } from "next/server";
-import requestsApiHandler from "./utils/middlewares/requestsApiHandler";
-import requestsPageHandler from "./utils/middlewares/requestsPageHander";
+import requestsApiHandler from "@/utils/middlewares/requestsApiHandler";
+import requestsPageHandler from "@/utils/middlewares/requestsPageHander";
 
 export const middleware = async (request: NextRequest) =>
   (await requestsApiHandler(request)) || requestsPageHandler(request);
