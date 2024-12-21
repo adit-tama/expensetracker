@@ -1,5 +1,5 @@
 import * as Factory from "factory.ts";
-import { ExpenseItemCardModel } from "./types";
+import { ExpenseItemCardModel } from "../models";
 
 export const ExpenseItemCardModelFactory =
   Factory.Sync.makeFactory<ExpenseItemCardModel>({

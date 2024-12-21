@@ -1,6 +1,6 @@
 import LoginForm from "../Login/LoginForm";
 
-const Loginpage = () => {
+const Registerpage = () => {
   return (
     <div className="w-screen h-screen flex justify-center items-center">
       <LoginForm />
@@ -8,4 +8,4 @@ const Loginpage = () => {
   );
 };
 
-export default Loginpage;
+export default Registerpage;

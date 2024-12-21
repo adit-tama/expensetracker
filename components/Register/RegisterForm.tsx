@@ -1,10 +1,12 @@
-import { useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import Logo from "../Layout/Logo";
+import { useRouter } from "next/router";
 import { useState } from "react";
 import { signInRequest } from "../../utils/client/requests";
 import { AuthPayloadModel } from "../../utils/data/models";
 
-const LoginForm = () => {
+const RegisterForm = () => {
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -83,4 +85,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default RegisterForm;

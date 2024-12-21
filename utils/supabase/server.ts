@@ -1,6 +1,8 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextRequest, NextResponse } from "next/server";
 import { SUPABASE_ANON_KEY, SUPABASE_URL } from "../constants";
+import { cookies } from "next/headers";
+import { createClient, SupabaseClientOptions } from "@supabase/supabase-js";
 
 export async function createSupabaseServerClient(
   response: NextResponse,
@@ -25,3 +27,38 @@ export async function createSupabaseServerClient(
     },
   });
 }
+
+const createSupabaseClient = (option: SupabaseClientOptions<string>) =>
+  createClient(SUPABASE_URL, SUPABASE_ANON_KEY, option);
+
+export const supabaseAuthClient = createSupabaseClient({
+  auth: {
+    autoRefreshToken: false,
+    persistSession: true,
+    detectSessionInUrl: false,
+  },
+});
+
+// export const createClient = async () => {
+//   const cookieStore = await cookies();
+
+//   return createServerClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+//     cookies: {
+//       getAll() {
+//         return cookieStore.getAll();
+//       },
+//       setAll(cookiesToSet) {
+//         try {
+//           cookiesToSet.forEach(({ name, value, options }) => {
+//             console.log(options);
+//             cookieStore.set(name, value);
+//           });
+//         } catch (error) {
+//           // The `set` method was called from a Server Component.
+//           // This can be ignored if you have middleware refreshing
+//           // user sessions.
+//         }
+//       },
+//     },
+//   });
+// };
