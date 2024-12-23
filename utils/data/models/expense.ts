@@ -3,3 +3,9 @@ export type ExpenseItemCardModel = {
   amount: string;
   ctaText: string;
 };
+
+export type ExpensePayloadModel = {
+  imageUrl: string;
+  amount: string;
+  currency: string;
+};

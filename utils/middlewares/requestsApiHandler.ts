@@ -1,7 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
 import { validateApiPath, validateCSRFToken } from "@/utils/middlewares/helper";
 
-const PUBLIC_API = ["/api/login", "/api/register", "/api/not-found"];
+const PUBLIC_API = [
+  "/api/login",
+  "/api/register",
+  "/api/not-found",
+  "/api/upload",
+  "/api/expense",
+];
 
 const requestsApiHandler = async (request: NextRequest) => {
   if (validateApiPath(request)) {

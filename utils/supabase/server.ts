@@ -27,7 +27,7 @@ export async function createSupabaseServerClient(
   });
 }
 
-const createSupabaseClient = (option: SupabaseClientOptions<string>) =>
+const createSupabaseClient = (option?: SupabaseClientOptions<string>) =>
   createClient(SUPABASE_URL, SUPABASE_ANON_KEY, option);
 
 export const supabaseAuthClient = createSupabaseClient({
@@ -37,3 +37,5 @@ export const supabaseAuthClient = createSupabaseClient({
     detectSessionInUrl: false,
   },
 });
+
+export const subabaseDbClient = createSupabaseClient();

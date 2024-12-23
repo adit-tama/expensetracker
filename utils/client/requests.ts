@@ -1,6 +1,6 @@
 import { HEADERS } from "@/utils/constants";
-import { AuthResponse } from "../data/dtos/auth";
-import { AuthPayloadModel } from "../data/models";
+import { AuthResponse, ExpensePostResponse } from "../data/dtos/auth";
+import { AuthPayloadModel, ExpensePayloadModel } from "../data/models";
 
 const createPostRequest =
   <T>(path: string) =>
@@ -16,8 +16,21 @@ const createPostRequest =
         [HEADERS.X_CSRF_TOKEN]: process.env.NEXT_PUBLIC_CSRF_TOKEN,
       },
       body: JSON.stringify(value),
-    }).then((data) => data.json());
+    }).then((response) => response.json());
   };
 
 export const signInRequest = async (payload: AuthPayloadModel) =>
   await createPostRequest<AuthResponse>("/api/login")(payload);
+
+export const uploadRequest = async (file: File, filename: string) =>
+  await fetch(`/api/upload?filename=${filename}`, {
+    method: "POST",
+    body: file,
+    headers: {
+      "Content-Type": "application/json",
+      [HEADERS.X_CSRF_TOKEN]: process.env.NEXT_PUBLIC_CSRF_TOKEN,
+    },
+  }).then((response) => response.json());
+
+export const expensePostRequest = async (payload: ExpensePayloadModel) =>
+  await createPostRequest<ExpensePostResponse>("/api/expense")(payload);

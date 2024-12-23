@@ -1,8 +1,7 @@
-type ApiResponse<T> = {
+type ApiResponse = {
   status: number;
   message: string;
   success: boolean;
-  data: T;
 };
 
 export type AuthDto = {
@@ -12,4 +11,6 @@ export type AuthDto = {
   };
 };
 
-export type AuthResponse = ApiResponse<AuthDto>;
+export type AuthResponse = ApiResponse & { data: AuthDto };
+
+export type ExpensePostResponse = ApiResponse;

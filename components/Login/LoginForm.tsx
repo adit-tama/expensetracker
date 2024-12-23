@@ -1,8 +1,8 @@
 import Logo from "@/components/Layout/Logo";
-import useLogin from "./useLogin";
+import useLoginForm from "./useLoginForm";
 
 const LoginForm = () => {
-  const { onSubmit, register, errors, isLoading } = useLogin();
+  const { onSubmit, register, errors, isLoading } = useLoginForm();
 
   return (
     <form
