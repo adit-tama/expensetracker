@@ -6,4 +6,5 @@ export type AuthPayloadModel = {
 export type AuthModel = {
   accessToken: string;
   refreshToken: string;
+  uid: number;
 };

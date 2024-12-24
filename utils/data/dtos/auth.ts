@@ -5,6 +5,9 @@ export type AuthDto = {
     access_token: string;
     refresh_token: string;
   };
+  user: {
+    id: number;
+  };
 };
 
 export type AuthResponse = ApiResponse & { data: AuthDto };

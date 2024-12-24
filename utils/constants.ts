@@ -37,4 +37,5 @@ export const WHITELIST_WEB_PATH = ["/login", "/register", "/404"];
 export const COOKIES_NAMES = {
   ACCESS_TOKEN: "__access_token",
   REFRESH_TOKEN: "__refresh_token",
+  UID: "__uid",
 } as const;
