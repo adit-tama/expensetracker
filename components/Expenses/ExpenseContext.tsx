@@ -51,7 +51,7 @@ export const ExpenseProvider: React.FC<{ children: ReactNode }> = ({
   const [expenseList, setExpenseList] = useState<Array<ExpenseItemCardModel>>(
     []
   );
-  const [isLoading, setIsLoading] = useState(false);
+  const { isLoading, closeLoading, openLoading } = useDialogContext();
   const [message, setMessage] = useState("");
   const {
     register,
@@ -73,18 +73,18 @@ export const ExpenseProvider: React.FC<{ children: ReactNode }> = ({
   };
 
   const fetchData = async () => {
-    setIsLoading(true);
+    openLoading();
     try {
       const { message, success, data } = await expenseGetRequest();
 
       if (!success) {
-        setIsLoading(false);
         setMessage(message);
+      } else {
+        setExpenseList(transfromExpenseListDto(data));
       }
-      setExpenseList(transfromExpenseListDto(data));
     } catch (err: unknown) {
     } finally {
-      setIsLoading(false);
+      closeLoading();
     }
   };
 
@@ -106,7 +106,7 @@ export const ExpenseProvider: React.FC<{ children: ReactNode }> = ({
   const handleSubmitForm = handleSubmit(async (value) => {
     if (!selectedFile) return;
 
-    setIsLoading(true);
+    openLoading();
 
     const filename = generateFilename(selectedFile);
 
@@ -124,7 +124,7 @@ export const ExpenseProvider: React.FC<{ children: ReactNode }> = ({
     const response = await expensePostRequest(dataPayload);
 
     if (!response.success) {
-      setIsLoading(false);
+      closeLoading();
       setMessage(response.message);
     }
 
@@ -133,14 +133,14 @@ export const ExpenseProvider: React.FC<{ children: ReactNode }> = ({
     reset();
     resetFields();
 
-    setIsLoading(false);
+    closeLoading();
     closeModal();
   });
 
   const handleDeleteExpenseItem = async (
     value: DbPayloadModel & { imageUrl: string }
   ) => {
-    setIsLoading(true);
+    openLoading();
     const response = await expenseDeleteRequest({
       id: value.id,
       imageUrl: value.imageUrl,
@@ -152,7 +152,7 @@ export const ExpenseProvider: React.FC<{ children: ReactNode }> = ({
 
     await fetchData();
 
-    setIsLoading(false);
+    closeLoading();
   };
 
   return (
