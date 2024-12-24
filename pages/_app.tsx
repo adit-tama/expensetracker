@@ -1,12 +1,15 @@
 import React from "react";
 import type { AppProps } from "next/app";
 import "@/styles/global.css";
-import { ModalProvider } from "../components/Layout/Dialog/DialogContext";
+import { DialogProvider } from "../components/Layout/Dialog/DialogContext";
+import { ExpenseProvider } from "../components/Expenses/ExpenseContext";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <ModalProvider>
-      <Component {...pageProps} />
-    </ModalProvider>
+    <DialogProvider>
+      <ExpenseProvider>
+        <Component {...pageProps} />
+      </ExpenseProvider>
+    </DialogProvider>
   );
 }

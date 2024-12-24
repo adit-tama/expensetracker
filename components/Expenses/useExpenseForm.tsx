@@ -1,9 +1,9 @@
 import { useForm } from "react-hook-form";
-import { AuthPayloadModel } from "../../utils/data/models";
+import { ExpensePayloadModel } from "../../utils/data/models";
 import { useState } from "react";
 import moment from "moment";
 import { PutBlobResult } from "@vercel/blob";
-import { useModalContext } from "../Layout/Dialog/DialogContext";
+import { useDialogContext } from "../Layout/Dialog/DialogContext";
 import { expensePostRequest, uploadRequest } from "../../utils/client/requests";
 
 export const generateFilename = (file: File) =>
@@ -13,12 +13,14 @@ const useExpenseForm = () => {
   const {
     register,
     formState: { errors },
-  } = useForm<AuthPayloadModel>();
+    handleSubmit,
+  } = useForm<ExpensePayloadModel>();
+
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [previewFile, setPreviewFile] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState("");
-  const { closeModal } = useModalContext();
+  const { closeModal } = useDialogContext();
 
   const handleFileUpload = async (
     event: React.ChangeEvent<HTMLInputElement>
@@ -31,21 +33,25 @@ const useExpenseForm = () => {
     }
   };
 
-  const onSubmit = async (value) => {
+  const onSubmit = handleSubmit(async (value) => {
     if (!selectedFile) return;
 
     setIsLoading(true);
 
+    const filename = generateFilename(selectedFile);
+
     const uploadedBlob: PutBlobResult = await uploadRequest(
       selectedFile,
-      generateFilename(selectedFile)
+      filename
     );
 
     if (!uploadedBlob.url) {
       return;
     }
 
-    const response = await expensePostRequest(value);
+    const dataPayload = { ...value, image_url: uploadedBlob.url, filename };
+
+    const response = await expensePostRequest(dataPayload);
 
     if (!response.success) {
       setIsLoading(false);
@@ -54,7 +60,7 @@ const useExpenseForm = () => {
 
     setIsLoading(false);
     closeModal();
-  };
+  });
 
   return {
     register,

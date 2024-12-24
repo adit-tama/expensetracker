@@ -1,11 +1,11 @@
-import { useModalContext } from "./DialogContext";
+import { useDialogContext } from "./DialogContext";
 
 type Props = {
   children: React.ReactNode;
 };
 
 const Dialog = ({ children }: Props) => {
-  const { isOpen } = useModalContext();
+  const { isOpen } = useDialogContext();
 
   if (isOpen) {
     return (

@@ -1,10 +1,16 @@
-import { useModalContext } from "../Layout/Dialog/DialogContext";
-import useExpenseForm from "./useExpenseForm";
+import { useDialogContext } from "../Layout/Dialog/DialogContext";
+import { useExpenseContext } from "./ExpenseContext";
 
 const ExpenseForm = () => {
-  const { closeModal } = useModalContext();
-  const { handleFileUpload, previewFile, onSubmit, message, isLoading } =
-    useExpenseForm();
+  const { closeModal } = useDialogContext();
+  const {
+    handleFileUpload,
+    previewFile,
+    handleSubmitForm,
+    message,
+    isLoading,
+    register,
+  } = useExpenseContext();
 
   return (
     <div className="grow shrink basis-0 p-4 bg-white rounded-lg flex-col justify-start items-start gap-6 flex max-w-[343px]">
@@ -21,17 +27,20 @@ const ExpenseForm = () => {
       </div>
       <form
         className="w-full max-w-[375px] flex-col justify-start items-start gap-6 inline-flex"
-        onSubmit={onSubmit}
+        onSubmit={handleSubmitForm}
       >
         <div className="self-stretch flex-row justify-start items-start gap-5 flex">
           <div className="self-stretch flex-col justify-start items-start gap-2 flex w-3/4">
             <label
               className=" text-stone-600 text-sm font-medium leading-[14px]"
-              htmlFor="email"
+              htmlFor="amount"
             >
               Amount
             </label>
             <input
+              {...register("amount", {
+                required: "please fill in the amount",
+              })}
               disabled={isLoading}
               id="amount"
               placeholder="99"
@@ -49,6 +58,9 @@ const ExpenseForm = () => {
               Currency
             </label>
             <select
+              {...register("currency", {
+                required: "please fill in the currency",
+              })}
               disabled={isLoading}
               name="currency"
               id="currecy"

@@ -1,9 +1,16 @@
-import * as Factory from "factory.ts";
 import { ExpenseItemCardModel } from "@/models/expense";
+import { ExpenseItemCardDto } from "../dtos/expense";
 
-export const ExpenseItemCardModelFactory =
-  Factory.Sync.makeFactory<ExpenseItemCardModel>({
-    date: "13 December 2023",
-    amount: "13 EUR",
-    ctaText: "Delete",
-  });
+export const transfromExpenseItemCardDto = (
+  dto: ExpenseItemCardDto
+): ExpenseItemCardModel => ({
+  id: dto.id,
+  filename: dto.filename,
+  amount: dto.amount,
+  currency: dto.currency,
+  imageUrl: dto.image_url,
+});
+
+export const transfromExpenseListDto = (
+  dto: Array<ExpenseItemCardDto>
+): Array<ExpenseItemCardModel> => dto.map(transfromExpenseItemCardDto);

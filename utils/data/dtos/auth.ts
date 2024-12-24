@@ -1,8 +1,4 @@
-type ApiResponse = {
-  status: number;
-  message: string;
-  success: boolean;
-};
+import { ApiResponse } from "./common";
 
 export type AuthDto = {
   session: {
@@ -12,5 +8,3 @@ export type AuthDto = {
 };
 
 export type AuthResponse = ApiResponse & { data: AuthDto };
-
-export type ExpensePostResponse = ApiResponse;

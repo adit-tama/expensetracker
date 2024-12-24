@@ -1,11 +1,12 @@
 import React from "react";
-import { ExpenseItemCardModelFactory } from "@/transformers/expense";
 
 import ExpenseItemCard from "@/components/Expenses/ExpenseItemCard";
-import { useModalContext } from "../Layout/Dialog/DialogContext";
+import { useDialogContext } from "../Layout/Dialog/DialogContext";
+import { useExpenseContext } from "./ExpenseContext";
 
 const ExpenseSection = () => {
-  const { openModal } = useModalContext();
+  const { openModal } = useDialogContext();
+  const { message, isLoading, expenseList } = useExpenseContext();
 
   return (
     <div>
@@ -18,9 +19,11 @@ const ExpenseSection = () => {
           <img src="/icons/plus-20.svg" />
         </button>
       </div>
+      {isLoading && <p>Loading...</p>}
+      {message && <p>{message}</p>}
       <div className="flex flex-col gap-3">
-        {ExpenseItemCardModelFactory.buildList(4).map((card, index) => (
-          <ExpenseItemCard {...card} key={index} />
+        {expenseList.map((card) => (
+          <ExpenseItemCard {...card} key={card.id} />
         ))}
       </div>
     </div>

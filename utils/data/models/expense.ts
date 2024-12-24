@@ -1,7 +1,9 @@
 export type ExpenseItemCardModel = {
-  date: string;
+  id: number;
+  filename: string;
   amount: string;
-  ctaText: string;
+  currency: string;
+  imageUrl: string;
 };
 
 export type ExpensePayloadModel = {

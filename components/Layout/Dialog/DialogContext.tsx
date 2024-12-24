@@ -1,14 +1,14 @@
 import React, { createContext, useContext, useState, ReactNode } from "react";
 
-type ModalContext = {
+type DialogContext = {
   isOpen: boolean;
   openModal: () => void;
   closeModal: () => void;
 };
 
-const ModalContext = createContext<ModalContext | undefined>(undefined);
+const DialogContext = createContext<DialogContext | undefined>(undefined);
 
-export const ModalProvider: React.FC<{ children: ReactNode }> = ({
+export const DialogProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -17,16 +17,16 @@ export const ModalProvider: React.FC<{ children: ReactNode }> = ({
   const closeModal = () => setIsOpen(false);
 
   return (
-    <ModalContext.Provider value={{ isOpen, openModal, closeModal }}>
+    <DialogContext.Provider value={{ isOpen, openModal, closeModal }}>
       {children}
-    </ModalContext.Provider>
+    </DialogContext.Provider>
   );
 };
 
-export const useModalContext = (): ModalContext => {
-  const context = useContext(ModalContext);
+export const useDialogContext = (): DialogContext => {
+  const context = useContext(DialogContext);
   if (!context) {
-    throw new Error("useModalContext must be used within a ModalProvider");
+    throw new Error("useDialogContext must be used within a DialogProvider");
   }
   return context;
 };
