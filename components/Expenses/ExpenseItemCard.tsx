@@ -12,7 +12,7 @@ const ExpenseItemCard = ({
   const { handleDeleteExpenseItem } = useExpenseContext();
 
   return (
-    <div className="h-[66px] w-full flex flex-row justify-between">
+    <div className="h-[66px] w-full flex flex-row justify-between items-center">
       <div className="flex items-center gap-4">
         <img className="w-[66px] h-[66px] rounded-md border-2" src={imageUrl} />
         <div className="justify-start items-start gap-3 flex flex-col w-fit">

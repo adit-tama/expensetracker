@@ -3,13 +3,14 @@ import React from "react";
 import ExpenseItemCard from "@/components/Expenses/ExpenseItemCard";
 import { useDialogContext } from "../Layout/Dialog/DialogContext";
 import { useExpenseContext } from "./ExpenseContext";
+import ExpenseSummary from "./ExpenseSummary";
 
 const ExpenseSection = () => {
   const { openModal, isLoading } = useDialogContext();
   const { message, expenseList } = useExpenseContext();
 
   return (
-    <div>
+    <div className="max-w-[468px] mt-0 mx-auto">
       <div className="pb-4 flex justify-between">
         <h2>Recent Expenses</h2>
         <button
@@ -19,6 +20,7 @@ const ExpenseSection = () => {
           <img src="/icons/plus-20.svg" />
         </button>
       </div>
+      <ExpenseSummary />
       {message && <p>{message}</p>}
       <div className="flex flex-col gap-3">
         {expenseList.map((card) => (
