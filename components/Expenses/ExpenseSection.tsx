@@ -17,7 +17,7 @@ const ExpenseSection = () => {
           className="w-[30px] h-[30px] bg-red-400 flex justify-center items-center rounded"
           onClick={openModal}
         >
-          <img src="/icons/plus-20.svg" />
+          <img src="/icons/plus-20-light.svg" />
         </button>
       </div>
       <ExpenseSummary />
