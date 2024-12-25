@@ -1,6 +1,6 @@
 import { del } from "@vercel/blob";
 import type { NextApiRequest, NextApiResponse } from "next";
-import { HTTP_STATUS } from "../../utils/constants";
+import { HEADERS, HTTP_STATUS } from "../../utils/constants";
 import { subabaseDbClient } from "../../utils/supabase/server";
 
 export default async function handler(
@@ -10,7 +10,7 @@ export default async function handler(
   if (req.method === "POST") {
     const { error } = await subabaseDbClient
       .from("expense")
-      .insert([req.body])
+      .insert([{ ...req.body, uid: req.headers[HEADERS.UID] }])
       .select();
 
     if (error) {
@@ -27,7 +27,10 @@ export default async function handler(
   }
 
   if (req.method === "GET") {
-    const { data, error } = await subabaseDbClient.from("expense").select("*");
+    const { data, error } = await subabaseDbClient
+      .from("expense")
+      .select("*")
+      .eq("uid", req.headers[HEADERS.UID]);
 
     if (error) {
       res

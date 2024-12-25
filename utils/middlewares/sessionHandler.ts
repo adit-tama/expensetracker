@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createSupabaseServerClient } from "@/utils/supabase/server";
-import { COOKIES_NAMES } from "../constants";
+import { COOKIES_NAMES, HEADERS } from "../constants";
 
 export const sessionHandler = async (request: NextRequest) => {
   let response = NextResponse.next({
@@ -22,6 +22,8 @@ export const sessionHandler = async (request: NextRequest) => {
   if (user.error) {
     return NextResponse.redirect(new URL("/login", request.url));
   }
+
+  return response;
 };
 
 export const sessionApiHandler = async (request: NextRequest) => {
@@ -34,13 +36,22 @@ export const sessionApiHandler = async (request: NextRequest) => {
 
     const supabaseClient = await createSupabaseServerClient(response, request);
 
-    const user = await supabaseClient.auth.getUser();
+    const token = request.cookies.get(COOKIES_NAMES.ACCESS_TOKEN)?.value;
+
+    const user = await supabaseClient.auth.getUser(token);
 
     if (user.error) {
       return NextResponse.redirect(new URL("/404", request.url));
     }
 
-    return response;
+    const headers = new Headers(request.headers);
+    headers.set(HEADERS.UID, user.data.user.id);
+
+    return NextResponse.next({
+      request: {
+        headers,
+      },
+    });
   } catch (e) {
     return NextResponse.next({
       request: {

@@ -8,6 +8,7 @@ export const HEADERS = {
   CONTENT_TYPE: "Content-Type",
   X_CSRF_TOKEN: "x-csrf-token",
   AUTHORIZATION: "Authorization",
+  UID: "uid",
 } as const;
 
 export enum HTTP_STATUS {

@@ -1,13 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import { validateApiPath, validateCSRFToken } from "@/utils/middlewares/helper";
+import { sessionApiHandler } from "./sessionHandler";
 
-const PUBLIC_API = [
-  "/api/login",
-  "/api/register",
-  "/api/not-found",
-  "/api/upload",
-  "/api/expense",
-];
+const WITH_SESSION_API = ["/api/not-found", "/api/upload", "/api/expense"];
+
+const NO_SESSION_API = ["/api/login", "/api/register"];
 
 const requestsApiHandler = async (request: NextRequest) => {
   if (validateApiPath(request)) {
@@ -18,7 +15,11 @@ const requestsApiHandler = async (request: NextRequest) => {
     return NextResponse.redirect(new URL("/404", request.url));
   }
 
-  if (PUBLIC_API.includes(request.nextUrl.pathname)) {
+  if (WITH_SESSION_API.includes(request.nextUrl.pathname)) {
+    return await sessionApiHandler(request);
+  }
+
+  if (NO_SESSION_API.includes(request.nextUrl.pathname)) {
     return NextResponse.next({
       request: {
         headers: request.headers,
