@@ -4,9 +4,10 @@ import ExpenseItemCard from "@/components/Expenses/ExpenseItemCard";
 import { useDialogContext } from "../Layout/Dialog/DialogContext";
 import { useExpenseContext } from "./ExpenseContext";
 import ExpenseSummary from "./ExpenseSummary";
+import ExpenseCleanup from "./ExpenseCleanUp";
 
 const ExpenseSection = () => {
-  const { openModal, isLoading } = useDialogContext();
+  const { openModal } = useDialogContext();
   const { message, expenseList } = useExpenseContext();
 
   return (
@@ -21,6 +22,7 @@ const ExpenseSection = () => {
         </button>
       </div>
       <ExpenseSummary />
+      <ExpenseCleanup />
       {message && <p>{message}</p>}
       <div className="flex flex-col gap-3">
         {expenseList.map((card) => (

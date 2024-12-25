@@ -38,6 +38,7 @@ type ExpenseContext = {
   handleDeleteExpenseItem: (
     value: DbPayloadModel & { imageUrl: string }
   ) => Promise<void>;
+  handleCleanUp: () => Promise<void>;
 };
 
 const ExpenseContext = createContext<ExpenseContext | undefined>(undefined);
@@ -155,6 +156,29 @@ export const ExpenseProvider: React.FC<{ children: ReactNode }> = ({
     closeLoading();
   };
 
+  const handleCleanUp = async () => {
+    openLoading();
+    let failedAttempt = [];
+    const promises = expenseList.map(
+      async (item) =>
+        await expenseDeleteRequest({
+          id: item.id,
+          imageUrl: item.imageUrl,
+        }).then(() => (result) => {
+          if (!result.success) failedAttempt.push(result);
+        })
+    );
+    await Promise.all(promises);
+
+    if (failedAttempt.length !== 0) {
+      console.log(failedAttempt);
+    }
+
+    await fetchData();
+
+    closeLoading();
+  };
+
   return (
     <ExpenseContext.Provider
       value={{
@@ -168,6 +192,7 @@ export const ExpenseProvider: React.FC<{ children: ReactNode }> = ({
         handleFileUpload,
         handleSubmitForm,
         handleDeleteExpenseItem,
+        handleCleanUp,
       }}
     >
       {children}

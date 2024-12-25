@@ -67,7 +67,6 @@ const ExpenseForm = () => {
               className="rounded px-2 py-3 self-stretch text-stone-500 text-sm font-normal leading-[14px] bg-stone-100 w-full"
             >
               <option value="eur">EUR</option>
-              <option value="idr">IDR</option>
             </select>
           </div>
         </div>
