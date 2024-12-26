@@ -1,7 +1,6 @@
 import { useForm } from "react-hook-form";
 import { signInRequest } from "../../utils/client/requests";
 import { AuthPayloadModel } from "../../utils/data/models";
-import Cookies from "universal-cookie";
 import { useState } from "react";
 import { useRouter } from "next/router";
 
@@ -14,8 +13,6 @@ const useLogin = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState("");
   const router = useRouter();
-
-  const cookiesStore = new Cookies();
 
   const onSubmit = handleSubmit(async (value) => {
     setIsLoading(true);

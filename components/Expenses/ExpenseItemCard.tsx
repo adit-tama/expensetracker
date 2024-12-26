@@ -14,7 +14,11 @@ const ExpenseItemCard = ({
   return (
     <div className="h-[66px] w-full flex flex-row justify-between items-center">
       <div className="flex items-center gap-4">
-        <img className="w-[66px] h-[66px] rounded-md border-2" src={imageUrl} />
+        <img
+          className="w-[66px] h-[66px] rounded-md border-2"
+          src={imageUrl}
+          alt={"receipt"}
+        />
         <div className="justify-start items-start gap-3 flex flex-col w-fit">
           <div className="self-stretch text-black text-sm font-normal leading-[14px]">
             {filename}

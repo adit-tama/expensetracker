@@ -1,4 +1,10 @@
-import React, { createContext, useContext, useState, ReactNode } from "react";
+import React, {
+  createContext,
+  useContext,
+  useState,
+  ReactNode,
+  useCallback,
+} from "react";
 
 type DialogContext = {
   isOpen: boolean;
@@ -17,11 +23,11 @@ export const DialogProvider: React.FC<{ children: ReactNode }> = ({
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  const openModal = () => setIsOpen(true);
-  const closeModal = () => setIsOpen(false);
+  const openModal = useCallback(() => setIsOpen(true), []);
+  const closeModal = useCallback(() => setIsOpen(false), []);
 
-  const openLoading = () => setIsLoading(true);
-  const closeLoading = () => setIsLoading(false);
+  const openLoading = useCallback(() => setIsLoading(true), []);
+  const closeLoading = useCallback(() => setIsLoading(false), []);
 
   return (
     <DialogContext.Provider

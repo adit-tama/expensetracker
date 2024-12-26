@@ -7,6 +7,7 @@ import React, {
   ReactNode,
   useEffect,
   BaseSyntheticEvent,
+  useCallback,
 } from "react";
 import { FieldErrors, useForm, UseFormRegister } from "react-hook-form";
 import {
@@ -73,7 +74,7 @@ export const ExpenseProvider: React.FC<{ children: ReactNode }> = ({
     setMessage("");
   };
 
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     openLoading();
     try {
       const { message, success, data } = await expenseGetRequest();
@@ -87,11 +88,11 @@ export const ExpenseProvider: React.FC<{ children: ReactNode }> = ({
     } finally {
       closeLoading();
     }
-  };
+  }, [closeLoading, openLoading]);
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [fetchData]);
 
   const handleFileUpload = async (
     event: React.ChangeEvent<HTMLInputElement>

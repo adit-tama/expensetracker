@@ -22,7 +22,7 @@ const ExpenseForm = () => {
           className="w-[30px] h-[30px] flex justify-center items-center rounded rotate-45"
           onClick={() => closeModal()}
         >
-          <img src="/icons/plus-20.svg" />
+          <img src="/icons/plus-20.svg" alt={"icon"} />
         </button>
       </div>
       <form
@@ -92,6 +92,7 @@ const ExpenseForm = () => {
             <img
               src={previewFile}
               className="h-[66px] bg-stone-400 w-1/4 rounded-lg"
+              alt={"receipt"}
             />
           ) : (
             <div className="h-[66px] bg-stone-400 w-1/4 rounded-lg" />
