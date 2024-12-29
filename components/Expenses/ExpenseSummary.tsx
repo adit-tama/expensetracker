@@ -4,8 +4,9 @@ import { useExpenseContext } from "./ExpenseContext";
 const ExpenseSummary = () => {
   const { expenseList } = useExpenseContext();
   const totalExpense = getTotal(expenseList);
-  const averageExpense =
-    totalExpense ?? Math.floor(totalExpense / expenseList.length);
+  const averageExpense = totalExpense
+    ? Math.floor(totalExpense / expenseList.length)
+    : 0;
   return (
     <div className="w-full flex gap-4 justify-between pb-4">
       <div className="w-full p-4 bg-stone-200 rounded-md flex-col justify-start items-start gap-3 inline-flex">
